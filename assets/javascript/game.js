@@ -122,49 +122,49 @@ document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWo
 
 //cpatured letter pressed by user
 document.onkeyup = function(event) {
-
-    var letter = String.fromCharCode(event.keyCode).toLowerCase();
-    var choosen = false;
-    //check if letter is in index of letter already guessed
-    if (lettersGuessed.indexOf(letter) === -1){ //we have not guess it yet, add to guessed letters and check if part of word
-        lettersGuessed.push(letter);
-        document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
-        letterPool = letterPool.filter(element => element !== letter); //remove letter from letterPool before we update html DOM
-        document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
-        for (var i =0; i < randomWord.length; i++){
-            if (letter === randomWord[i]){
-                guessWord[i] = letter;
-                choosen = true;
+    if(guessRemaining != 0){ //check we have lives left before proceeding
+        var letter = String.fromCharCode(event.keyCode).toLowerCase();
+        var choosen = false;
+        //check if letter is in index of letter already guessed
+        if (lettersGuessed.indexOf(letter) === -1){ //we have not guess it yet, add to guessed letters and check if part of word
+            lettersGuessed.push(letter);
+            document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
+            letterPool = letterPool.filter(element => element !== letter); //remove letter from letterPool before we update html DOM
+            document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
+            for (var i =0; i < randomWord.length; i++){
+                if (letter === randomWord[i]){
+                    guessWord[i] = letter;
+                    choosen = true;
+                }
             }
         }
-    }
-    else{ //guessed already so dont subtract a life
-        choosen = true;
-    }
+        else{ //guessed already so dont subtract a life
+            choosen = true;
+        }
 
-    //if letter has not already been choosen subtract a life
-    if(!choosen){
-        guessRemaining--;
-        animate();
-        document.getElementById("guessRemaining").innerHTML = "Number of guesses remaining: " + guessRemaining;
-    }
+        //if letter has not already been choosen subtract a life
+        if(!choosen){
+            guessRemaining--;
+            animate();
+            document.getElementById("guessRemaining").innerHTML = "Number of guesses remaining: " + guessRemaining;
+        }
 
-    // check if our guessword array is fully completed or if we have ran out of guesses
-    if (guessWord.join("") === randomWord){
-        document.getElementById("gameStatus").innerHTML = "YOU WIN! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
-        document.getElementById("newGame").innerHTML = "Play Again!";
-        winCount++;
-        playWinMusic();
-    }
-    else if (guessRemaining === 0) {
-        document.getElementById("gameStatus").innerHTML = "OUT OF GUESSES, SORRY YOU LOSE! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
-        document.getElementById("newGame").innerHTML = "Play Again!";
-    }
+        // check if our guessword array is fully completed or if we have ran out of guesses
+        if (guessWord.join("") === randomWord){
+            document.getElementById("gameStatus").innerHTML = "YOU WIN! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
+            document.getElementById("newGame").innerHTML = "Play Again!";
+            winCount++;
+            playWinMusic();
+        }
+        else if (guessRemaining === 0) {
+            document.getElementById("gameStatus").innerHTML = "OUT OF GUESSES, SORRY YOU LOSE! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
+            document.getElementById("newGame").innerHTML = "Play Again!";
+        }
 
-    //update html for guess word to show progress
-    document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
-    console.log("word chosen: " + randomWord); //left in to always know the answer
-
+        //update html for guess word to show progress
+        document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
+        console.log("word chosen: " + randomWord); //left in to always know the answer
+    }
 
 }
 
