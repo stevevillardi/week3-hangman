@@ -12,6 +12,8 @@ Tracks:
     Letters already guessed
     Letter available to choose
 
-To pick a new word simply click the new word button.
+To pick a new word simply click the new word button. 
+
+Categories are People, Places and Summons of FF7 (Some may be more than one word)
 
 Not letter keypresses are ignored and when you are out of lives game ends until you start a new game.

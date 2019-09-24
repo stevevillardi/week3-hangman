@@ -13,14 +13,19 @@ playGame = function () {
     letterPool = [...'abcdefghijklmnopqrstuvwxyz'];
     guessRemaining = 10;
     lettersGuessed = [];
-    wordList = ["cloud","tifa","aerith","barret","yuffie","vincent","zack","red","caitsith","cid","sephiroth","jenova","rufus","hojo","avalanche","marlene","midgar","materia","chocobo","shiva","ifrit","titan","odin","leviathan","bahamut","phoenix","hades","typhon"]
+    wordList = ["nibelheim","mount nibel","kalm","junon harbor","gold saucer","costa del sol","cosmo canyon","corel prison","city of the ancients","chocobo ranch","cactuar island","bone village","ancient forest","cloud strife","tifa lockhart","aerith gainsborough","barret wallace","yuffie kisaragi","vincent valentine","red xiii","cait sith","cid highwind","sephiroth","jenova","rufus shinra","hojo","avalanche","marlene","midgar","materia","chocobo","shiva","ifrit","titan","odin","leviathan","bahamut","phoenix","hades","typhon"];
     randomWord = wordList[Math.floor(Math.random()*wordList.length)];
     guessWord = [];
     canvas();
 
     //create blank letter display
-    for (char in randomWord){
-        guessWord.push("_");
+    for(var i=0; i < randomWord.length; i++) {
+        if(randomWord[i] === " "){
+            guessWord.push(" - ");
+        }
+        else{
+            guessWord.push("_");
+        }
     }
 }
 
@@ -154,7 +159,7 @@ document.onkeyup = function(event) {
             }
 
             // check if our guessword array is fully completed or if we have ran out of guesses
-            if (guessWord.join("") === randomWord){
+            if (guessWord.join("").replace(" - ", " ") === randomWord){
                 document.getElementById("gameStatus").innerHTML = "YOU WIN! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
                 document.getElementById("newGame").innerHTML = "Play Again!";
                 winCount++;
