@@ -13,3 +13,5 @@ Tracks:
     Letter available to choose
 
 To pick a new word simply click the new word button.
+
+Not letter keypresses are ignored and when you are out of lives game ends until you start a new game.
