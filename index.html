@@ -8,32 +8,46 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
-    <title>Hangman</title>
+    <title>FF7 Hangman</title>
 </head>
 <body>
+    <audio id="winMusic">
+        <source src="./assets/audio/win-ff7.mp3" type="audio/mpeg">
+    </audio>
+              
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center">Hangman Game</h1>
+                <h1 class="text-center">Final Fantasy 7 Hangman</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <h3 class="text-center">Press any key to get started!</h3>
+                <br>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-8 border">
+        <div class="row ">
+            <div class="col-md-2 "></div>
+            <div class="col-md-4 border my-auto ">
+                <div id="winCount"></div>
                 <div id="letterPool"></div>
                 <div id="guessRemaining"></div>
                 <div id="lettersGuessed"></div>
-                <div id="guessWord"></div>
-                <div id="gameStatus"></div>
                 <br>
-                <button id="newGame" class="btn btn-primary">New Game</button>
+                <button id="newGame" class="btn btn-primary">New Word</button>
             </div>
             <div class="col-md-4 border">
                 <canvas id="hangman"></canvas>
+            </div>
+            <div class="col-md-2 "></div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                    <div id="guessWord"></div>
+            </div>
+            <div class="col-12 text-center">
+                <div id="gameStatus"></div>
             </div>
         </div>
     </div>

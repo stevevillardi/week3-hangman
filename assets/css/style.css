@@ -1,8 +1,33 @@
 html {
-    background-color: aqua;
+    background-image: url(../images/background.jpg);
     
+}
+
+body {
+    background-color: transparent !important;
+    color: white !important;
 }
 
 #newGame {
     margin-bottom: 20px;
+}
+
+#hangman {
+    height: 100%;
+    width: 100%;
+    padding: 15px;
+}
+
+#guessWord {
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+#gameStatus {
+    margin-top: 50px;
+    font-size: 35px;
+}
+
+#winCount {
+    margin-top: 20px;
 }
