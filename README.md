@@ -1,7 +1,8 @@
 # week3-hangman
 Final Fantasy 7 Hangman
 
-Press any key to being playing. 
+##Instrucitons
+Press any letter key to being playing. Keypresses for non characters will be ignored.
 
 Words are chosen from an array of characters and places from FF7.
 
@@ -16,4 +17,4 @@ To pick a new word simply click the new word button.
 
 Categories are People, Places and Summons of FF7 (Some may be more than one word)
 
-Not letter keypresses are ignored and when you are out of lives game ends until you start a new game.
+When you are out of lives game ends until you start a new game.
