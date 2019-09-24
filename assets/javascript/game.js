@@ -151,21 +151,19 @@ document.onkeyup = function(event) {
 
     // check if our guessword array is fully completed or if we have ran out of guesses
     if (guessWord.join("") === randomWord){
-        console.log("YOU WIN!");
         document.getElementById("gameStatus").innerHTML = "YOU WIN! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
         document.getElementById("newGame").innerHTML = "Play Again!";
         winCount++;
         playWinMusic();
     }
     else if (guessRemaining === 0) {
-        console.log("OUT OF GUESSES, YOU LOSE!");
         document.getElementById("gameStatus").innerHTML = "OUT OF GUESSES, SORRY YOU LOSE! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
         document.getElementById("newGame").innerHTML = "Play Again!";
     }
 
     //update html for guess word to show progress
     document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
-    console.log("word chosen: " + randomWord);
+    console.log("word chosen: " + randomWord); //left in to always know the answer
 
 
 }
