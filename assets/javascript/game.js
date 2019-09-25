@@ -7,6 +7,13 @@ var randomWord;
 var guessWord = [];
 var winCount = 0;
 
+//Declare canvas context so we can draw hangman
+var hangman = document.getElementById("hangman");
+var context = hangman.getContext('2d');
+
+//Delcare audio element so we can build or audio function
+var winMusic = document.getElementById("winMusic"); 
+
 //game function to setup new game
 playGame = function () {
     //Setup new game
@@ -30,14 +37,10 @@ playGame = function () {
 }
 
 //draws the index of the remaining guess to the hangman canvas
-var animate = function () {
+animate = function () {
     var drawMe = guessRemaining ;
     drawArray[drawMe]();
 }
-
-//Declare canvas context so we can draw hangman
-var hangman = document.getElementById("hangman");
-var context = hangman.getContext('2d');
 
 //Sets canvas options
 canvas =  function(){
@@ -60,6 +63,32 @@ draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
     context.lineTo($pathTox, $pathToy);
     context.stroke(); 
 }
+
+//Draw letter buttons to screen for mobile players
+buildLetterButtons = function() {
+    var buttonDiv = document.getElementById("letterButtons");
+    var buttonList = document.createElement("ul");
+    for(var i=0; i < letterPool.length; i++){
+        buttonItem = document.createElement("li");
+        buttonItem.className = "buttonPress";
+        buttonItem.innerHTML = letterPool[i];
+        checkClick();
+        buttonList.appendChild(buttonItem);
+        buttonDiv.appendChild(buttonList);
+    }
+}
+
+//press letter by clicking button
+checkClick = function () {
+    buttonItem.onclick = function () {
+        this.setAttribute("class", "clicked");
+        console.log(this)
+        console.log(this.innerHTML);
+        var clickedGuess = this.innerHTML;
+        checkWord(clickedGuess);
+    }
+}
+
 
 //All functions to draw hangman lines using canvas, not going to lie, found the coord functions on google.
 frame1 = function() {
@@ -103,14 +132,7 @@ leftLeg = function() {
     context.strokeStyle = "#808080";
 };
 
-//Build array of parts so we can draw them based of remaining guesses index
-drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
-
-
-playGame();
-
 //build audio source and function to play win music
-var winMusic = document.getElementById("winMusic"); 
 function playWinMusic() { 
     winMusic.play(); 
 } 
@@ -121,6 +143,12 @@ function stopWinMusic() {
     winMusic.currentTime = 0;
 } 
 
+//Build array of parts so we can draw them based of remaining guesses index
+drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
+
+playGame();
+buildLetterButtons();
+
 //setup html elements
 document.getElementById("winCount").innerHTML = "Total Wins: " + winCount;
 document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
@@ -128,9 +156,7 @@ document.getElementById("guessRemaining").innerHTML = "Number of guesses remaini
 document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
 document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
 
-//cpatured letter pressed by user
-document.onkeyup = function(event) {
-    var letter = String.fromCharCode(event.keyCode).toLowerCase();
+function checkWord(letter) {
     var choosen = false;
     if(letterPool.indexOf(letter) != -1){ //dont register no letter key strokes as guesses
         if(guessRemaining != 0){ //check we have lives left before proceeding
@@ -177,11 +203,25 @@ document.onkeyup = function(event) {
     }
 }
 
+//cpatured letter pressed by user
+document.onkeyup = function(event){
+    var letter = String.fromCharCode(event.keyCode).toLowerCase();
+    checkWord(letter);
+}
+
+
+
 //Reset game when new game button is clicked
 document.getElementById('newGame').onclick = function() {
-    context.clearRect(0, 0, 400, 400);
-    playGame();
-    stopWinMusic();
+    context.clearRect(0, 0, 400, 400); //clear canvas
+
+    playGame(); //reset game
+    stopWinMusic(); //stop audio if clicked before done playing sounds
+
+    document.getElementById("letterButtons").innerHTML = ""; //reset letterButton div so we can play again
+    buildLetterButtons(); //rebuild letterbutton list
+
+    //reset page elements for fresh game
     document.getElementById("gameStatus").innerHTML = "";
     document.getElementById("winCount").innerHTML = "Total Wins: " + winCount;
     document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
@@ -189,5 +229,6 @@ document.getElementById('newGame').onclick = function() {
     document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
     document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
     document.getElementById("newGame").innerHTML = "New Word";
+
 }
 

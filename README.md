@@ -18,3 +18,6 @@ To pick a new word simply click the new word button.
 Categories are People, Places and Summons of FF7 (Some may be more than one word)
 
 When you are out of lives game ends until you start a new game.
+
+TODO List:
+update letterButtons so if someone clicks or types a letter the on screen letter button deactivates. currently a type letter will not update the letterButton list items.

@@ -19,7 +19,7 @@ body {
 }
 
 #guessWord {
-    margin-top: 50px;
+    margin-top: 25px;
     font-size: 50px;
 }
 
@@ -30,4 +30,41 @@ body {
 
 #winCount {
     margin-top: 20px;
+}
+
+#letterButtons li {
+    display: inline;
+    list-style:none;
+    padding: 10px;
+    border: 3px solid #0062cc;
+    background-color: #0069d9;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+#letterButtons li:hover {
+    background-color: #0062cc;
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+ul {
+    padding-inline-start: 0px !important;
+}
+
+h4 {
+    margin-bottom: 20px;
+}
+
+.clicked {
+    border: none !important;
+    background-color: lightgrey !important;
+    color: black !important;
+    border: 3px solid lightgrey !important;
+}
+
+.clicked:hover {
+    border: none !important;
+    background-color: lightgrey !important;
+    border: 3px solid lightgrey !important;
 }
