@@ -82,8 +82,6 @@ buildLetterButtons = function() {
 checkClick = function () {
     buttonItem.onclick = function () {
         this.setAttribute("class", "clicked");
-        console.log(this)
-        console.log(this.innerHTML);
         var clickedGuess = this.innerHTML;
         checkWord(clickedGuess);
     }
@@ -148,6 +146,7 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3
 
 playGame();
 buildLetterButtons();
+console.log("shhh dont tell anyone, the secret word is: " + randomWord); //left in to always know the answer
 
 //setup html elements
 document.getElementById("winCount").innerHTML = "Total Wins: " + winCount;
@@ -198,7 +197,6 @@ function checkWord(letter) {
 
             //update html for guess word to show progress
             document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
-            console.log("word chosen: " + randomWord); //left in to always know the answer
         }
     }
 }
