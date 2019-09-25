@@ -11,7 +11,7 @@ var winCount = 0;
 var hangman = document.getElementById("hangman");
 var context = hangman.getContext('2d');
 
-//Delcare audio element so we can build or audio function
+//Delcare audio element so we can build our audio function
 var winMusic = document.getElementById("winMusic"); 
 
 //game function to setup new game
