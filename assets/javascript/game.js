@@ -181,13 +181,13 @@ function checkWord(letter) {
 
             // check if our guessword array is fully completed or if we have ran out of guesses
             if (guessWord.join("").replace(" - ", " ") === randomWord){
-                document.getElementById("gameStatus").innerHTML = "YOU WIN! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
+                document.getElementById("gameStatus").innerHTML = "You Win! The city of Midgar has been saved! " + randomWord.toUpperCase() + " was the secret word!";
                 document.getElementById("newGame").innerHTML = "Play Again!";
                 winCount++;
                 playWinMusic();
             }
             else if (guessRemaining === 0) {
-                document.getElementById("gameStatus").innerHTML = "OUT OF GUESSES, SORRY YOU LOSE! THE CORRECT WORD WAS: " + randomWord.toUpperCase();
+                document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase();
                 document.getElementById("newGame").innerHTML = "Play Again!";
             }
 
