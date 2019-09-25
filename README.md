@@ -1,23 +1,20 @@
 # week3-hangman
 Final Fantasy 7 Hangman
 
-##Instrucitons
-Press any letter key to being playing. Keypresses for non characters will be ignored.
+## Instructions
+The city of Midgar is under attack by the Diamond Weapon, only you can stop thier attempts at destroying the city. Using your keyboard or the letter buttons below, choose a letter and try to guess the secret word. You have 10 chances to guess the word before the Diamond Weapon destroys the city! Keypresses for non characters will be ignored.
 
-Words are chosen from an array of characters and places from FF7.
+## Screenshot
+![image][/assets/images/hangman.png] | width=500
 
-Victory music plays when you solved a word and any wrong guess will draw the next appropriate hangman part via html canvas.
+### How it works
+- Words are chosen from an array of characters and places from FF7.
+- To pick a new word simply click the new word button or solve the current word and a new game will start automatically after 5 seconds.
+- Victory of defeat SFX will play depending on the outcome 
+- Click on the music icon to listen background music while you play
 
-Tracks:
-    Total # of Wins
-    Letters already guessed
-    Letter available to choose
+### Statistics
+- Total # of Wins
+- Letters already guessed
+- Letter available to choose
 
-To pick a new word simply click the new word button. 
-
-Categories are People, Places and Summons of FF7 (Some may be more than one word)
-
-When you are out of lives game ends until you start a new game.
-
-TODO List:
-update letterButtons so if someone clicks or types a letter the on screen letter button deactivates. currently a type letter will not update the letterButton list items. - COMPLETED
