@@ -6,6 +6,7 @@ var wordList = [];
 var randomWord;
 var guessWord = [];
 var winCount = 0;
+var gameOver;
 
 //Declare canvas context so we can draw hangman
 var hangman = document.getElementById("hangman");
@@ -16,6 +17,8 @@ var winMusic = document.getElementById("winMusic");
 winMusic.volume = 0.2; //save eardrums
 var themeMusic = document.getElementById("themeMusic");
 themeMusic.volume = 0.2; // save eardrums
+var dieMusic = document.getElementById("dieMusic");
+dieMusic.volume = 0.2; // save eardrums
 
 //game function to setup new game
 playGame = function () {
@@ -23,6 +26,7 @@ playGame = function () {
     letterPool = [...'abcdefghijklmnopqrstuvwxyz'];
     guessRemaining = 10;
     lettersGuessed = [];
+    gameOver = false;
     wordList = ["nibelheim","mount nibel","kalm","junon harbor","gold saucer","costa del sol","cosmo canyon","corel prison","city of the ancients","chocobo ranch","cactuar island","bone village","ancient forest","cloud strife","tifa lockhart","aerith gainsborough","barret wallace","yuffie kisaragi","vincent valentine","red xiii","cait sith","cid highwind","sephiroth","jenova","rufus shinra","hojo","avalanche","marlene","midgar","materia","chocobo","shiva","ifrit","titan","odin","leviathan","bahamut","phoenix","hades","typhon"];
     randomWord = wordList[Math.floor(Math.random()*wordList.length)];
     guessWord = [];
@@ -37,6 +41,7 @@ playGame = function () {
             guessWord.push("_");
         }
     }
+    console.log("shhh dont tell anyone, the secret word is: " + randomWord); //left in to always know the answer
 }
 
 //draws the index of the remaining guess to the hangman canvas
@@ -87,7 +92,7 @@ checkClick = function () {
         this.setAttribute("class", "clicked");
         var clickedGuess = this.innerHTML;
         checkWord(clickedGuess);
-    }
+    }   
 }
 
 
@@ -133,7 +138,6 @@ drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3
 
 playGame();
 buildLetterButtons();
-console.log("shhh dont tell anyone, the secret word is: " + randomWord); //left in to always know the answer
 
 //setup html elements
 document.getElementById("winCount").innerHTML = "Total times Midgar has been saved: " + winCount;
@@ -143,50 +147,55 @@ document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: 
 document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
 
 function checkWord(letter) {
-    var choosen = false;
-    document.getElementById("instruction").style.display = "none";
-    if(letterPool.indexOf(letter) != -1){ //dont register no letter key strokes as guesses
-        if(guessRemaining != 0){ //check we have lives left before proceeding
-            //check if letter is in index of letter already guessed
-            if (lettersGuessed.indexOf(letter) === -1){ //we have not guess it yet, add to guessed letters and check if part of word
-                lettersGuessed.push(letter);
-                document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
-                letterPool = letterPool.filter(element => element !== letter); //remove letter from letterPool before we update html DOM
-                document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
-                for (var i =0; i < randomWord.length; i++){
-                    if (letter === randomWord[i]){
-                        guessWord[i] = letter;
-                        choosen = true;
+    if(!gameOver){
+        var choosen = false;
+        document.getElementById("instruction").style.display = "none";
+        if(letterPool.indexOf(letter) != -1){ //dont register no letter key strokes as guesses
+            if(guessRemaining != 0){ //check we have lives left before proceeding
+                //check if letter is in index of letter already guessed
+                if (lettersGuessed.indexOf(letter) === -1){ //we have not guess it yet, add to guessed letters and check if part of word
+                    lettersGuessed.push(letter);
+                    document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
+                    letterPool = letterPool.filter(element => element !== letter); //remove letter from letterPool before we update html DOM
+                    document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
+                    for (var i =0; i < randomWord.length; i++){
+                        if (letter === randomWord[i]){
+                            guessWord[i] = letter;
+                            choosen = true;
+                        }
                     }
                 }
-            }
-            else{ //guessed already so dont subtract a life
-                choosen = true;
-            }
+                else{ //guessed already so dont subtract a life
+                    choosen = true;
+                }
 
-            //if letter has not already been choosen subtract a life
-            if(!choosen){
-                guessRemaining--;
-                animate();
-                document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
-            }
+                //if letter has not already been choosen subtract a life
+                if(!choosen){
+                    guessRemaining--;
+                    animate();
+                    document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
+                }
 
-            // check if our guessword array is fully completed or if we have ran out of guesses
-            if (guessWord.join("").replace(" - ", " ") === randomWord){
-                document.getElementById("gameStatus").innerHTML = "You Win! The city of Midgar has been saved! " + randomWord.toUpperCase() + " was the secret word! Click on play again or wait 5 seconds for another game to start.";
-                document.getElementById("newGame").innerHTML = "Play Again!";
-                winCount++;
-                winMusic.play();
-                setTimeout(function(){ nextGame()}, 5000);
-            }
-            else if (guessRemaining === 0) {
-                document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase() + ". Click on play again or wait 5 seconds for another game to start.";
-                document.getElementById("newGame").innerHTML = "Play Again!";
-                setTimeout(function(){ nextGame()}, 5000);
-            }
+                // check if our guessword array is fully completed or if we have ran out of guesses
+                if (guessWord.join("").replace(/ - /g, " ") === randomWord){
+                    document.getElementById("gameStatus").innerHTML = "You Win! The city of Midgar has been saved! " + randomWord.toUpperCase() + " was the secret word!<br>Click on play again or wait 5 seconds for another game to start.";
+                    document.getElementById("newGame").innerHTML = "Play Again!";
+                    gameOver = true;
+                    winCount++;
+                    winMusic.play();
+                    setTimeout(function(){ nextGame()}, 7000);
+                }
+                else if (guessRemaining === 0) {
+                    document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase() + ".<br>Click on play again or wait 5 seconds for another game to start.";
+                    document.getElementById("newGame").innerHTML = "Play Again!";
+                    gameOver = true;
+                    dieMusic.play();
+                    setTimeout(function(){ nextGame()}, 7000);
+                }
 
-            //update html for guess word to show progress
-            document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
+                //update html for guess word to show progress
+                document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
+            }
         }
     }
 }
@@ -197,6 +206,8 @@ function nextGame(){
     playGame(); //reset game
     winMusic.pause(); //stop audio if clicked before done playing sounds
     winMusic.currentTime =0;
+    dieMusic.pause(); //stop audio if clicked before done playing sounds
+    dieMusic.currentTime =0;
 
     document.getElementById("letterButtons").innerHTML = ""; //reset letterButton div so we can play again
     buildLetterButtons(); //rebuild letterbutton list
@@ -214,9 +225,13 @@ function nextGame(){
 
 //cpatured letter pressed by user
 document.onkeyup = function(event){
-    var letter = String.fromCharCode(event.keyCode).toLowerCase();
-    $("li:contains('" + letter + "')")[0].setAttribute("class", "clicked");
-    checkWord(letter);
+    if(!gameOver){
+        var letter = String.fromCharCode(event.keyCode).toLowerCase();
+        if(letterPool.indexOf(letter) != -1){
+            $("li:contains('" + letter + "')")[0].setAttribute("class", "clicked");
+            checkWord(letter);
+        }
+    }
 }
 
 //Play theme music if icon is selected
