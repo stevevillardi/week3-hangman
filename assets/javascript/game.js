@@ -13,6 +13,7 @@ var context = hangman.getContext('2d');
 
 //Delcare audio element so we can build our audio function
 var winMusic = document.getElementById("winMusic"); 
+winMusic.volume = 0.5;
 var themeMusic = document.getElementById("themeMusic"); 
 
 //game function to setup new game
@@ -211,7 +212,7 @@ document.getElementById('newGame').onclick = function() {
     context.clearRect(0, 0, 400, 400); //clear canvas
 
     playGame(); //reset game
-    winMusic.pause; //stop audio if clicked before done playing sounds
+    winMusic.pause(); //stop audio if clicked before done playing sounds
     winMusic.currentTime =0;
 
     document.getElementById("letterButtons").innerHTML = ""; //reset letterButton div so we can play again
