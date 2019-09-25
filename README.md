@@ -1,5 +1,5 @@
 # week3-hangman
-Final Fantasy 7 Hangman
+# Final Fantasy 7 Hangman
 
 ## Instructions
 The city of Midgar is under attack by the Diamond Weapon, only you can stop thier attempts at destroying the city. Using your keyboard or the letter buttons below, choose a letter and try to guess the secret word. You have 10 chances to guess the word before the Diamond Weapon destroys the city! Keypresses for non characters will be ignored.
@@ -18,3 +18,10 @@ The city of Midgar is under attack by the Diamond Weapon, only you can stop thie
 - Letters already guessed
 - Letter available to choose
 
+### Features
+- Supports multi word arrays
+- Only accepts valid keypresses
+- Letter buttons for mouse/mobile play
+- Made using Bootstrap, jQuery, and Javascript
+- Canvas drawn hangman show progress
+- Viewport auto sizes for responsive scaling
