@@ -18,7 +18,7 @@ The city of Midgar is under attack by the Diamond Weapon, only you can stop thie
 - Letter available to choose
 
 ### Features
-- Supports multi word arrays
+- Supports multi word arrays (separated by a "-")
 - Only accepts valid keypresses
 - Letter buttons for mouse/mobile play
 - Made using Bootstrap, jQuery, and Javascript
