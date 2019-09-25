@@ -204,6 +204,7 @@ function checkWord(letter) {
 //cpatured letter pressed by user
 document.onkeyup = function(event){
     var letter = String.fromCharCode(event.keyCode).toLowerCase();
+    $("li:contains('" + letter + "')")[0].setAttribute("class", "clicked");
     checkWord(letter);
 }
 
