@@ -1,5 +1,5 @@
 html {
-    background-image: url(../images/background.jpg);
+    background-image: url(../images/background2.png);
 }
 
 body {
@@ -17,6 +17,16 @@ body {
     height: 100%;
     width: 100%;
     padding: 15px;
+}
+
+img {
+    display: block;
+    margin: auto;
+}
+
+.mainContent {
+    background-color: black;
+    border-radius: 5px;
 }
 
 #guessWord {
@@ -68,3 +78,9 @@ h4 {
     background-color: lightgrey !important;
     border: 3px solid lightgrey !important;
 }
+
+@media only screen and (max-width: 768px) {
+    .sideBar {
+      display: none;
+    }
+  }
