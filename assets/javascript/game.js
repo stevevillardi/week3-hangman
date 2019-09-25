@@ -13,9 +13,9 @@ var context = hangman.getContext('2d');
 
 //Delcare audio element so we can build our audio function
 var winMusic = document.getElementById("winMusic"); 
-winMusic.volume = 0.5;
+winMusic.volume = 0.5; //save eardrums
 var themeMusic = document.getElementById("themeMusic");
-themeMusic.volume = 0.5;
+themeMusic.volume = 0.5; // save eardrums
 
 //game function to setup new game
 playGame = function () {
