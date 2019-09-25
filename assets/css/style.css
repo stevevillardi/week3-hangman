@@ -54,6 +54,10 @@ img {
     border-color: #575757;
 }
 
+.fa-music {
+    font-size: 200%;
+}
+
 #letterButtons li {
     display: inline;
     list-style:none;
@@ -79,6 +83,16 @@ ul {
 
 h4 {
     margin-bottom: 20px;
+}
+
+.fa-music {
+    margin-right: 20px;
+}
+
+.fa-music:hover {
+    margin-right: 20px;
+    color: #8D8B8B;
+    cursor: pointer;
 }
 
 .clicked {

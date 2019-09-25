@@ -13,6 +13,7 @@ var context = hangman.getContext('2d');
 
 //Delcare audio element so we can build our audio function
 var winMusic = document.getElementById("winMusic"); 
+var themeMusic = document.getElementById("themeMusic"); 
 
 //game function to setup new game
 playGame = function () {
@@ -125,17 +126,6 @@ leftLeg = function() {
     draw (60, 70, 20, 100);
 };
 
-//build audio source and function to play win music
-function playWinMusic() { 
-    winMusic.play(); 
-} 
-
-//build stop function when we clear game sound start back at 0 seconds
-function stopWinMusic() { 
-    winMusic.pause();
-    winMusic.currentTime = 0;
-} 
-
 //Build array of parts so we can draw them based of remaining guesses index
 drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
 
@@ -144,9 +134,9 @@ buildLetterButtons();
 console.log("shhh dont tell anyone, the secret word is: " + randomWord); //left in to always know the answer
 
 //setup html elements
-document.getElementById("winCount").innerHTML = "Total Wins: " + winCount;
+document.getElementById("winCount").innerHTML = "Total times Midgar has been saved: " + winCount;
 document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
-document.getElementById("guessRemaining").innerHTML = "Number of guesses remaining: " + guessRemaining;
+document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
 document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
 document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
 
@@ -176,7 +166,7 @@ function checkWord(letter) {
             if(!choosen){
                 guessRemaining--;
                 animate();
-                document.getElementById("guessRemaining").innerHTML = "Number of guesses remaining: " + guessRemaining;
+                document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
             }
 
             // check if our guessword array is fully completed or if we have ran out of guesses
@@ -184,7 +174,7 @@ function checkWord(letter) {
                 document.getElementById("gameStatus").innerHTML = "You Win! The city of Midgar has been saved! " + randomWord.toUpperCase() + " was the secret word!";
                 document.getElementById("newGame").innerHTML = "Play Again!";
                 winCount++;
-                playWinMusic();
+                winMusic.play();
             }
             else if (guessRemaining === 0) {
                 document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase();
@@ -204,14 +194,25 @@ document.onkeyup = function(event){
     checkWord(letter);
 }
 
-
+document.getElementById('musicButton').onclick = function() {
+    if(themeMusic.paused){
+        themeMusic.play();
+        themeMusic.loop = true;
+        document.getElementById('musicButton').style.color = "#8D8B8B";
+    }
+    else{
+        themeMusic.pause();
+        document.getElementById('musicButton').style.color = "white";
+    }
+}
 
 //Reset game when new game button is clicked
 document.getElementById('newGame').onclick = function() {
     context.clearRect(0, 0, 400, 400); //clear canvas
 
     playGame(); //reset game
-    stopWinMusic(); //stop audio if clicked before done playing sounds
+    winMusic.pause; //stop audio if clicked before done playing sounds
+    winMusic.currentTime =0;
 
     document.getElementById("letterButtons").innerHTML = ""; //reset letterButton div so we can play again
     buildLetterButtons(); //rebuild letterbutton list
@@ -219,9 +220,9 @@ document.getElementById('newGame').onclick = function() {
     //reset page elements for fresh game
     document.getElementById("gameStatus").innerHTML = "";
     document.getElementById("instruction").style.display = "block";
-    document.getElementById("winCount").innerHTML = "Total Wins: " + winCount;
+    document.getElementById("winCount").innerHTML = "Total times Midgar has been saved: " + winCount;
     document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
-    document.getElementById("guessRemaining").innerHTML = "Number of guesses remaining: " + guessRemaining;
+    document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
     document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
     document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
     document.getElementById("newGame").innerHTML = "New Word";
