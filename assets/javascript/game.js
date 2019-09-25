@@ -13,9 +13,9 @@ var context = hangman.getContext('2d');
 
 //Delcare audio element so we can build our audio function
 var winMusic = document.getElementById("winMusic"); 
-winMusic.volume = 0.5; //save eardrums
+winMusic.volume = 0.2; //save eardrums
 var themeMusic = document.getElementById("themeMusic");
-themeMusic.volume = 0.5; // save eardrums
+themeMusic.volume = 0.2; // save eardrums
 
 //game function to setup new game
 playGame = function () {
@@ -173,14 +173,16 @@ function checkWord(letter) {
 
             // check if our guessword array is fully completed or if we have ran out of guesses
             if (guessWord.join("").replace(" - ", " ") === randomWord){
-                document.getElementById("gameStatus").innerHTML = "You Win! The city of Midgar has been saved! " + randomWord.toUpperCase() + " was the secret word!";
+                document.getElementById("gameStatus").innerHTML = "You Win! The city of Midgar has been saved! " + randomWord.toUpperCase() + " was the secret word! Click on play again or wait 5 seconds for another game to start.";
                 document.getElementById("newGame").innerHTML = "Play Again!";
                 winCount++;
                 winMusic.play();
+                setTimeout(function(){ nextGame()}, 5000);
             }
             else if (guessRemaining === 0) {
-                document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase();
+                document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase() + ". Click on play again or wait 5 seconds for another game to start.";
                 document.getElementById("newGame").innerHTML = "Play Again!";
+                setTimeout(function(){ nextGame()}, 5000);
             }
 
             //update html for guess word to show progress
@@ -189,27 +191,7 @@ function checkWord(letter) {
     }
 }
 
-//cpatured letter pressed by user
-document.onkeyup = function(event){
-    var letter = String.fromCharCode(event.keyCode).toLowerCase();
-    $("li:contains('" + letter + "')")[0].setAttribute("class", "clicked");
-    checkWord(letter);
-}
-
-document.getElementById('musicButton').onclick = function() {
-    if(themeMusic.paused){
-        themeMusic.play();
-        themeMusic.loop = true;
-        document.getElementById('musicButton').style.color = "#8D8B8B";
-    }
-    else{
-        themeMusic.pause();
-        document.getElementById('musicButton').style.color = "white";
-    }
-}
-
-//Reset game when new game button is clicked
-document.getElementById('newGame').onclick = function() {
+function nextGame(){
     context.clearRect(0, 0, 400, 400); //clear canvas
 
     playGame(); //reset game
@@ -228,6 +210,31 @@ document.getElementById('newGame').onclick = function() {
     document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
     document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
     document.getElementById("newGame").innerHTML = "New Word";
+ }
 
+//cpatured letter pressed by user
+document.onkeyup = function(event){
+    var letter = String.fromCharCode(event.keyCode).toLowerCase();
+    $("li:contains('" + letter + "')")[0].setAttribute("class", "clicked");
+    checkWord(letter);
+}
+
+//Play theme music if icon is selected
+document.getElementById('musicButton').onclick = function() {
+    if(themeMusic.paused){
+        themeMusic.play();
+        themeMusic.loop = true;
+        document.getElementById('musicButton').style.color = "#8D8B8B";
+    }
+    else{
+        themeMusic.pause();
+        document.getElementById('musicButton').style.color = "white";
+    }
+}
+
+
+//Reset game when new game button is clicked
+document.getElementById('newGame').onclick = function() {
+    nextGame();
 }
 
