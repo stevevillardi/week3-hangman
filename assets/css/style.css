@@ -73,6 +73,9 @@ img {
 ul {
     padding-inline-start: 0px !important;
 }
+.sideImg {
+    max-height: 375px;
+}
 
 h4 {
     margin-bottom: 20px;

@@ -107,27 +107,22 @@ frame4 = function() {
 
 torso = function() {
     draw (60, 36, 60, 70);
-    context.strokeStyle = "#808080";
 };
 
 rightArm = function() {
     draw (60, 46, 100, 50);
-    context.strokeStyle = "#808080";
 };
 
 leftArm = function() {
     draw (60, 46, 20, 50);
-    context.strokeStyle = "#808080";
 };
 
 rightLeg = function() {
     draw (60, 70, 100, 100);
-    context.strokeStyle = "#808080";
 };
 
 leftLeg = function() {
     draw (60, 70, 20, 100);
-    context.strokeStyle = "#808080";
 };
 
 //build audio source and function to play win music
@@ -157,6 +152,7 @@ document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWo
 
 function checkWord(letter) {
     var choosen = false;
+    document.getElementById("instruction").style.display = "none";
     if(letterPool.indexOf(letter) != -1){ //dont register no letter key strokes as guesses
         if(guessRemaining != 0){ //check we have lives left before proceeding
             //check if letter is in index of letter already guessed
@@ -222,6 +218,7 @@ document.getElementById('newGame').onclick = function() {
 
     //reset page elements for fresh game
     document.getElementById("gameStatus").innerHTML = "";
+    document.getElementById("instruction").style.display = "block";
     document.getElementById("winCount").innerHTML = "Total Wins: " + winCount;
     document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
     document.getElementById("guessRemaining").innerHTML = "Number of guesses remaining: " + guessRemaining;
