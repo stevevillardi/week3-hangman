@@ -27,15 +27,23 @@
                 <br>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                    <div id="guessWord"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div id="gameStatus"></div>
+            </div>
+        </div>
         <div class="row ">
             <div class="col-md-2 "></div>
-            <div class="col-md-4 border my-auto ">
+            <div class="col-md-4 border">
                 <div id="winCount"></div>
                 <div id="guessRemaining"></div>
                 <div id="letterPool"></div>
                 <div id="lettersGuessed"></div>
-                <br>
-                <button id="newGame" class="btn btn-primary">New Word</button>
             </div>
             <div class="col-md-4 border">
                 <canvas id="hangman"></canvas>
@@ -43,18 +51,12 @@
             <div class="col-md-2 "></div>
         </div>
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-md-12 text-center">
                 <br>
                 <h4>Click on a letter to guess</h4>
-                <div id="letterButtons" class="text-center"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-center">
-                    <div id="guessWord"></div>
-            </div>
-            <div class="col-12 text-center">
-                <div id="gameStatus"></div>
+                <div id="letterButtons" class="text-center mx-auto"></div>
+                <br>
+                <button id="newGame" class="btn btn-primary">New Word</button>
             </div>
         </div>
     </div>

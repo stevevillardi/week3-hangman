@@ -1,6 +1,5 @@
 html {
     background-image: url(../images/background.jpg);
-    
 }
 
 body {
@@ -9,7 +8,9 @@ body {
 }
 
 #newGame {
-    margin-bottom: 20px;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
 }
 
 #hangman {
@@ -19,12 +20,11 @@ body {
 }
 
 #guessWord {
-    margin-top: 25px;
     font-size: 50px;
 }
 
 #gameStatus {
-    margin-top: 50px;
+    margin-bottom: 15px;
     font-size: 35px;
 }
 
@@ -36,8 +36,8 @@ body {
     display: inline;
     list-style:none;
     padding: 10px;
-    border: 3px solid #0062cc;
-    background-color: #0069d9;
+    border: 3px solid #007bff;
+    background-color: #007bff;
     border-radius: 5px;
     margin-left: 5px;
 }
