@@ -5,7 +5,7 @@ Final Fantasy 7 Hangman
 The city of Midgar is under attack by the Diamond Weapon, only you can stop thier attempts at destroying the city. Using your keyboard or the letter buttons below, choose a letter and try to guess the secret word. You have 10 chances to guess the word before the Diamond Weapon destroys the city! Keypresses for non characters will be ignored.
 
 ## Screenshot
-![image](/assets/images/hangman.png) | width=500
+![image](/assets/images/hangman.png)
 
 ### How it works
 - Words are chosen from an array of characters and places from FF7.
