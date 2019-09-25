@@ -25,7 +25,7 @@ img {
 }
 
 .mainContent {
-    background-color: black;
+    background-color: #191919;
     border-radius: 5px;
 }
 
@@ -42,19 +42,31 @@ img {
     margin-top: 20px;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #8D8B8B;
+    border-color: #575757;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #575757;
+    border-color: #575757;
+}
+
 #letterButtons li {
     display: inline;
     list-style:none;
     padding: 10px;
-    border: 3px solid #007bff;
-    background-color: #007bff;
+    border: 3px solid #8D8B8B;
+    background-color: #8D8B8B;
     border-radius: 5px;
     margin-left: 5px;
 }
 
 #letterButtons li:hover {
-    background-color: #0062cc;
-    border: 3px solid white;
+    background-color: #575757;
+    border: 3px solid #575757;
     cursor: pointer;
 }
 
@@ -77,6 +89,20 @@ h4 {
     border: none !important;
     background-color: lightgrey !important;
     border: 3px solid lightgrey !important;
+}
+
+.footer {
+    background-color: #575757!important;
+    border-top: 1px solid #8D8B8B;
+  }
+
+.bg-light {
+    border-bottom: 1px solid #8D8B8B;
+    background-color: #575757!important;
+}
+
+.navbar-light .navbar-brand {
+    color: white !important;
 }
 
 @media only screen and (max-width: 768px) {
