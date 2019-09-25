@@ -141,9 +141,9 @@ buildLetterButtons();
 
 //setup html elements
 document.getElementById("winCount").innerHTML = "Total times Midgar has been saved: " + winCount;
-document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
+document.getElementById("letterPool").innerHTML = "Available letters to choose from: <br>" + letterPool.join(" ");
 document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
-document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
+document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: <br>" + lettersGuessed.join(" ");
 document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
 
 function checkWord(letter) {
@@ -155,9 +155,9 @@ function checkWord(letter) {
                 //check if letter is in index of letter already guessed
                 if (lettersGuessed.indexOf(letter) === -1){ //we have not guess it yet, add to guessed letters and check if part of word
                     lettersGuessed.push(letter);
-                    document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
+                    document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: <br>" + lettersGuessed.join(" ");
                     letterPool = letterPool.filter(element => element !== letter); //remove letter from letterPool before we update html DOM
-                    document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
+                    document.getElementById("letterPool").innerHTML = "Available letters to choose from: <br>" + letterPool.join(" ");
                     for (var i =0; i < randomWord.length; i++){
                         if (letter === randomWord[i]){
                             guessWord[i] = letter;
@@ -216,9 +216,9 @@ function nextGame(){
     document.getElementById("gameStatus").innerHTML = "";
     document.getElementById("instruction").style.display = "block";
     document.getElementById("winCount").innerHTML = "Total times Midgar has been saved: " + winCount;
-    document.getElementById("letterPool").innerHTML = "Available letters to choose from: " + letterPool.join(" ");
+    document.getElementById("letterPool").innerHTML = "Available letters to choose from: <br>" + letterPool.join(" ");
     document.getElementById("guessRemaining").innerHTML = "Guesses left before Midgar is destroyed: " + guessRemaining;
-    document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: " + lettersGuessed.join(" ");
+    document.getElementById("lettersGuessed").innerHTML = "Letters already guessed: <br>" + lettersGuessed.join(" ");
     document.getElementById("guessWord").innerHTML = "Word to guess: <br>" + guessWord.join(" ");
     document.getElementById("newGame").innerHTML = "New Word";
  }
