@@ -7,6 +7,7 @@ var randomWord;
 var guessWord = [];
 var winCount = 0;
 var gameOver;
+var timeOut;
 
 //Declare canvas context so we can draw hangman
 var hangman = document.getElementById("hangman");
@@ -183,14 +184,14 @@ function checkWord(letter) {
                     gameOver = true;
                     winCount++;
                     winMusic.play();
-                    setTimeout(function(){ nextGame()}, 7000);
+                    timeOut = setTimeout(function(){ nextGame()}, 7000);
                 }
                 else if (guessRemaining === 0) {
                     document.getElementById("gameStatus").innerHTML = "Oh No, there's no more time left, the Diamond Weapon has destroyed Midgar, the secret word was " + randomWord.toUpperCase() + ".<br>Click on play again or wait 5 seconds for another game to start.";
                     document.getElementById("newGame").innerHTML = "Play Again!";
                     gameOver = true;
                     dieMusic.play();
-                    setTimeout(function(){ nextGame()}, 7000);
+                    timeOut = setTimeout(function(){ nextGame()}, 7000);
                 }
 
                 //update html for guess word to show progress
@@ -202,7 +203,7 @@ function checkWord(letter) {
 
 function nextGame(){
     context.clearRect(0, 0, 400, 400); //clear canvas
-
+    console.log("resetgame")
     playGame(); //reset game
     winMusic.pause(); //stop audio if clicked before done playing sounds
     winMusic.currentTime =0;
@@ -250,6 +251,7 @@ document.getElementById('musicButton').onclick = function() {
 
 //Reset game when new game button is clicked
 document.getElementById('newGame').onclick = function() {
+    clearTimeout(timeOut);
     nextGame();
 }
 
